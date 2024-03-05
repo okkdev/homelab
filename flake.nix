@@ -6,7 +6,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
   };
 
-  outputs = { self, nixpkgs, deploy-rs }: {
+  outputs = { self, nixpkgs, deploy-rs, ... }: {
     nixosConfigurations = {
       nix-node-1 = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";

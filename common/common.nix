@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 
@@ -17,5 +19,10 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "prohibit-password";
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 80 443 ];
   };
 }

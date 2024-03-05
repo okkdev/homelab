@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }@args:
 
 {
   imports = [
     ../hardware/cm4/hardware-configuration.nix
     ../common/common.nix
+    ../common/nomad.nix
   ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
