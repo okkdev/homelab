@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }@args:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -7,17 +7,7 @@
     ../common/nomad.nix
   ];
 
-  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-  boot.loader.grub.enable = false;
-  # Enables the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  networking = {
-    hostName = "nix-node-1";
-    networkmanager.enable = true;
-  };
+  networking.hostName = "nix-node-1";
 
   system.stateVersion = "23.11";
 }

@@ -37,8 +37,6 @@
             self.nixosConfigurations.nix-node-2;
         };
       };
-
     };
-
   };
 }

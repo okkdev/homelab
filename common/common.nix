@@ -3,6 +3,8 @@
 {
   nixpkgs.config.allowUnfree = true;
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Set your time zone.
   time.timeZone = "Europe/Zurich";
 
@@ -12,7 +14,9 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [ vim ];
+  environment.systemPackages = with pkgs; [ vim btop ];
+
+  networking.networkmanager.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
