@@ -1,0 +1,15 @@
+keys:
+  - &personal age1ukx4wxssue9d5y72tt7wk0nqg86wjhcnsy80ky0kkwf5m8p72a7su87kf3
+  - &cm4-node-1 age1hnzrlvwx7ej6yyg8uvuwmx0vln37n554ksp6ryarne2qhqm2ggxqta3sra
+  - &cm4-node-2 age1yk9d90hd37thd3w56urke49jdat6yehfj6dsh3m77y3edpy0pppsp5s7wj
+  - &rk1-node-1 age1h2due5w4mfp9es3p34znk8yujn73n856jrypnwkaszaf66tpma4qv7wajq
+  - &rk1-node-2 age1m8hxem565mprflphn5e3yrwxdsz3q06x4nzc6xpju0y6knudfuwsz2g8w2
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *personal
+          - *cm4-node-1
+          - *cm4-node-2
+          - *rk1-node-1
+          - *rk1-node-2

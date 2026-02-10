@@ -1,17 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
+{ ... }:
 {
   imports = [
     ../hardware/cm4
     ../modules/common.nix
+    ../modules/tailscale.nix
+    ../modules/caddy.nix
+    ../modules/ddclient.nix
   ];
-
-  networking.hostName = "cm4-node-1";
 
   system.stateVersion = "23.11";
 }
