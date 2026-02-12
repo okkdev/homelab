@@ -8,6 +8,8 @@
 }:
 
 {
+  imports = [ ./beszel-agent.nix ];
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
@@ -69,14 +71,13 @@
       };
     };
   };
+  sops.secrets = {
+    desec-acme-token = { };
+  };
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-  };
-
-  sops.secrets = {
-    desec-acme-token = { };
   };
 }

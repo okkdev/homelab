@@ -5,7 +5,7 @@
     openFirewall = true;
     hostName = ""; # binds all
     port = 64738;
-    environmentFile = config.sops.secrets.mumble-env.path;
+    environmentFile = config.sops.secrets."mumble.env".path;
 
     registerHostname = "mumble.goo.garden";
     registerName = "📞 mumble.goo.garden";
@@ -22,7 +22,7 @@
     group = config.services.murmur.group;
   };
 
-  sops.secrets.mumble-env = {
+  sops.secrets."mumble.env" = {
     sopsFile = ../secrets/mumble.env;
     format = "dotenv";
   };

@@ -39,6 +39,9 @@
       "matrix.goo.garden".extraConfig = ''
         reverse_proxy cm4-node-2:6167
       '';
+      "beszel.goo.garden".extraConfig = ''
+        reverse_proxy localhost:${toString config.services.beszel.hub.port}
+      '';
     };
   };
 
