@@ -33,19 +33,23 @@
 
       hosts = {
         cm4-node-1 = {
-          ip = "10.0.0.11";
+          ipv4 = "10.0.0.11";
+          ipv6 = "2a02:168:7353::68f";
           hardware = nixos-hardware.nixosModules.raspberry-pi-4;
         };
         cm4-node-2 = {
-          ip = "10.0.0.12";
+          ipv4 = "10.0.0.12";
+          ipv6 = "2a02:168:7353::6f8";
           hardware = nixos-hardware.nixosModules.raspberry-pi-4;
         };
         rk1-node-1 = {
-          ip = "10.0.0.13";
+          ipv4 = "10.0.0.13";
+          ipv6 = "2a02:168:7353::7bf";
           hardware = turing-rk1.nixosModules.turing-rk1;
         };
         rk1-node-2 = {
-          ip = "10.0.0.14";
+          ipv4 = "10.0.0.14";
+          ipv6 = "2a02:168:7353::708";
           hardware = turing-rk1.nixosModules.turing-rk1;
         };
       };
@@ -65,7 +69,7 @@
         };
 
       mkDeploy = name: host: {
-        hostname = host.ip;
+        hostname = host.ipv4;
         profiles.system = {
           sshUser = "root";
           user = "root";

@@ -5,7 +5,7 @@
     ../modules/common.nix
     ../modules/tailscale.nix
     ../modules/caddy.nix
-    ../modules/ddclient.nix
+    ../modules/dyndns.nix
   ];
 
   system.stateVersion = "23.11";

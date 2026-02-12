@@ -1,16 +1,14 @@
 {
   config,
   name,
+  lib,
+  hosts,
   pkgs,
   ...
 }:
 
 {
-  # set name from flake host list
-  networking.hostName = name;
-
   nixpkgs.config.allowUnfree = true;
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -30,8 +28,6 @@
     btop
   ];
 
-  networking.networkmanager.enable = true;
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -39,10 +35,25 @@
     settings.PermitRootLogin = "prohibit-password";
   };
 
-  networking.nftables.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 22 ];
+  networking = {
+    networkmanager.enable = true;
+
+    # set name from flake host list
+    hostName = name;
+
+    # generate /etc/hosts entries for all nodes
+    hosts = lib.mkMerge (
+      lib.mapAttrsToList (hostname: host: {
+        ${host.ipv4} = [ hostname ];
+        ${host.ipv6} = [ hostname ];
+      }) hosts
+    );
+
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 ];
+    };
   };
 
   security.acme = {

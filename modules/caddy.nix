@@ -1,6 +1,5 @@
 {
   config,
-  hosts,
   ...
 }:
 {
@@ -11,13 +10,13 @@
       grace_period 1m
     '';
     virtualHosts = {
-      "(acme_tls)".extraConfig = ''
+      "(goo_garden_cert)".extraConfig = ''
         tls ${config.security.acme.certs."goo.garden".directory}/fullchain.pem ${
           config.security.acme.certs."goo.garden".directory
         }/key.pem
       '';
       "goo.garden".extraConfig = ''
-        import acme_tls
+        import goo_garden_cert
 
         handle /.well-known/matrix/server {
           header Content-Type application/json
@@ -34,14 +33,11 @@
         }
       '';
       "*.goo.garden".extraConfig = ''
-        import acme_tls
+        import goo_garden_cert
         abort
       '';
       "matrix.goo.garden".extraConfig = ''
-        reverse_proxy ${hosts.cm4-node-2.ip}:6167
-      '';
-      "mumble.goo.garden:64738".extraConfig = ''
-        reverse_proxy ${hosts.cm4-node-2.ip}:64738
+        reverse_proxy cm4-node-2:6167
       '';
     };
   };
@@ -52,17 +48,8 @@
     reloadServices = [ "caddy" ];
   };
 
-  networking.firewall = {
-    allowedTCPPorts = [
-      80
-      443
-
-      # mumble
-      64738
-    ];
-    allowedUDPPorts = [
-      # mumble
-      64738
-    ];
-  };
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 }

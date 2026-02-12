@@ -3,10 +3,11 @@
   services.murmur = {
     enable = true;
     openFirewall = true;
+    hostName = ""; # binds all
     port = 64738;
     environmentFile = config.sops.secrets.mumble-env.path;
 
-    hostName = "mumble.goo.garden";
+    registerHostname = "mumble.goo.garden";
     registerName = "📞 mumble.goo.garden";
     welcometext = "more like John Goo";
 
