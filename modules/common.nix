@@ -8,7 +8,10 @@
 }:
 
 {
-  imports = [ ./beszel-agent.nix ];
+  imports = [
+    ./beszel/agent.nix
+    ./restic.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
