@@ -71,9 +71,7 @@
       };
     };
   };
-  sops.secrets = {
-    desec-acme-token = { };
-  };
+  sops.secrets.desec-acme-token = { };
 
   sops = {
     defaultSopsFile = ../secrets/secrets.yaml;
