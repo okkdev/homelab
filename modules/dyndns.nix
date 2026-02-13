@@ -5,10 +5,10 @@
   ...
 }:
 let
-  tld = "goo.garden";
+  domain = "goo.garden";
   dyndnsDomains = [
-    tld
-    "mumble.${tld}"
+    domain
+    "mumble.${domain}"
   ];
 in
 {
