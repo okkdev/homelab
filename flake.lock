@@ -70,11 +70,29 @@
         "type": "github"
       }
     },
+    "nixpkgs-beszel-pr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770973197,
+        "narHash": "sha256-pkgq5JHUo95xd2FWjY6ntnuOgOZQL54zMOFFKL4f2Aw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e9253e411d8cde6e2feeabba640c573d622beba6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "refs/pull/461327/merge",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-beszel-pr": "nixpkgs-beszel-pr",
         "sops-nix": "sops-nix",
         "turing-rk1": "turing-rk1"
       }

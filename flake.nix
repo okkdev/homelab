@@ -16,6 +16,13 @@
       url = "github:GiyoMoon/nixos-turing-rk1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # PR: nixos/beszel-agent: Enable systemd monitoring
+    # https://github.com/NixOS/nixpkgs/pull/461327
+    nixpkgs-beszel-pr = {
+      url = "github:NixOS/nixpkgs/refs/pull/461327/merge";
+      flake = false;
+    };
   };
 
   outputs =
@@ -27,7 +34,7 @@
       turing-rk1,
       sops-nix,
       ...
-    }:
+    }@inputs:
     let
       inherit (nixpkgs) lib;
 
@@ -59,7 +66,12 @@
         lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
-            inherit host hosts name;
+            inherit
+              host
+              hosts
+              name
+              inputs
+              ;
           };
           modules = [
             host.hardware
