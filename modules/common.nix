@@ -3,6 +3,7 @@
   name,
   lib,
   hosts,
+  host,
   pkgs,
   ...
 }:
@@ -41,16 +42,17 @@
   };
 
   networking = {
-    networkmanager.enable = true;
+    useNetworkd = true;
+    useDHCP = false;
 
     # set name from flake host list
     hostName = name;
 
     # generate /etc/hosts entries for all nodes
     hosts = lib.mkMerge (
-      lib.mapAttrsToList (hostname: host: {
-        ${host.ipv4} = [ hostname ];
-        ${host.ipv6} = [ hostname ];
+      lib.mapAttrsToList (hostname: h: {
+        ${h.ipv4} = [ hostname ];
+        ${h.ipv6} = [ hostname ];
       }) hosts
     );
 
@@ -58,6 +60,24 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ 22 ];
+    };
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."10-lan" = {
+      matchConfig.Name = "end0";
+      address = [
+        "${host.ipv4}/24"
+        "${host.ipv6}/64"
+      ];
+      gateway = [ "10.0.0.1" ];
+      networkConfig = {
+        IPv6AcceptRA = true;
+      };
+      ipv6AcceptRAConfig = {
+        UseDNS = true;
+      };
     };
   };
 

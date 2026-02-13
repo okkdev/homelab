@@ -43,22 +43,22 @@
       hosts = {
         cm4-node-1 = {
           ipv4 = "10.0.0.11";
-          ipv6 = "2a02:168:7353::68f";
+          ipv6 = "2a02:168:7353::11";
           hardware = nixos-hardware.nixosModules.raspberry-pi-4;
         };
         cm4-node-2 = {
           ipv4 = "10.0.0.12";
-          ipv6 = "2a02:168:7353::6f8";
+          ipv6 = "2a02:168:7353::12";
           hardware = nixos-hardware.nixosModules.raspberry-pi-4;
         };
         rk1-node-1 = {
           ipv4 = "10.0.0.13";
-          ipv6 = "2a02:168:7353::7bf";
+          ipv6 = "2a02:168:7353::13";
           hardware = turing-rk1.nixosModules.turing-rk1;
         };
         rk1-node-2 = {
           ipv4 = "10.0.0.14";
-          ipv6 = "2a02:168:7353::708";
+          ipv6 = "2a02:168:7353::14";
           hardware = turing-rk1.nixosModules.turing-rk1;
         };
       };
