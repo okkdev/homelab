@@ -2,15 +2,18 @@
   config,
   name,
   inputs,
+  pkgs-unstable,
   ...
 }:
 {
   # Use beszel-agent module from PR #461327 (systemd monitoring support)
-  imports = [ "${inputs.nixpkgs-beszel-pr}/nixos/modules/services/monitoring/beszel-agent.nix" ];
   disabledModules = [ "services/monitoring/beszel-agent.nix" ];
+  imports = [ "${inputs.nixpkgs-beszel-pr}/nixos/modules/services/monitoring/beszel-agent.nix" ];
 
   services.beszel.agent = {
     enable = true;
+    openFirewall = true;
+    package = pkgs-unstable.beszel;
     environmentFile = config.sops.templates."beszel-agent.env".path;
   };
 

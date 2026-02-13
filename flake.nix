@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
@@ -29,6 +30,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       deploy-rs,
       nixos-hardware,
       turing-rk1,
@@ -63,6 +65,13 @@
 
       mkSystem =
         name: host:
+        let
+          system = "aarch64-linux";
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        in
         lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = {
@@ -70,6 +79,7 @@
               host
               hosts
               name
+              pkgs-unstable
               inputs
               ;
           };
