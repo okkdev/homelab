@@ -30,6 +30,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    nfs-utils
     vim
     btop
   ];
@@ -79,6 +80,21 @@
         UseDNS = true;
       };
     };
+  };
+
+  # mount synology nas nfs
+  boot.supportedFilesystems = [ "nfs" ];
+  fileSystems."/mnt/nas" = {
+    device = "10.0.0.2:/volume1/nfs";
+    fsType = "nfs";
+    options = [
+      "nfsvers=4.1"
+      "rw"
+      "nofail"
+      "_netdev"
+      "soft"
+      "timeo=150"
+    ];
   };
 
   security.acme = {

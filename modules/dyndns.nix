@@ -9,6 +9,7 @@ let
   dyndnsDomains = [
     domain
     "mumble.${domain}"
+    "minecraft.${domain}"
   ];
 in
 {

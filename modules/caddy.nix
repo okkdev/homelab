@@ -39,6 +39,9 @@
       "beszel.goo.garden".extraConfig = ''
         reverse_proxy localhost:${toString config.services.beszel.hub.port}
       '';
+      "nas.goo.garden".extraConfig = ''
+        reverse_proxy 10.0.0.2:5000
+      '';
     };
   };
 
